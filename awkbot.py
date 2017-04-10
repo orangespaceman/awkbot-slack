@@ -88,7 +88,8 @@ class Bot():
                         match = False
                         for message in action["content"]:
                             string = "<@%s> %s" % (self.bot_user, message)
-                            if "text" in event and string == event["text"]:
+                            if ("text" in event and
+                                    event["text"].startswith(string)):
                                 match = True
                         if match is False:
                             continue

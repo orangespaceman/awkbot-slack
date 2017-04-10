@@ -23,7 +23,7 @@ def list_actions():
         {
             "type": "message",
             "description": "Pause Spotify",
-            "content": ["pause"],
+            "content": ["pause", "stop"],
             "function": "pause"
         },
         {
