@@ -96,7 +96,7 @@ class Bot():
                     # filter - list help methods?
                     if (event.get("type") == "message" and "text" in event and
                             event["text"] == "<@%s> help" % self.bot_user):
-                        self.log_help()
+                        self.log_help(event["channel"])
 
                     func = getattr(module, action["function"])
                     log = func(event)
@@ -119,7 +119,7 @@ class Bot():
         if "output" in log:
             self.sc.rtm_send_message(log["channel"], log["output"])
 
-    def log_help(self):
+    def log_help(self, channel):
         msg = "Available commands:\r"
         for module_name, module in self.modules.iteritems():
             msg += "\r_%s:_\r" % module_name
@@ -130,7 +130,7 @@ class Bot():
                                                  action["description"])
                 else:
                     msg += " - %s\r" % (action["description"])
-        self.sc.rtm_send_message(self.debug_channel, msg)
+        self.sc.rtm_send_message(channel, msg)
 
     def get_user_name_by_id(self, user_id):
         for user in self.users["members"]:
