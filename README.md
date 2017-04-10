@@ -44,6 +44,8 @@ There are two parts to installing _Awkbot_: the creation of a bot user through S
 
 - Create a new channel in Slack for debug messages - e.g. `#awkward-bot`
 
+- Add the bot user to all channels that you want it to work in
+
 #### Installation on Local machine
 
 - Clone this repo

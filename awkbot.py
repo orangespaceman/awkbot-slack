@@ -117,7 +117,7 @@ class Bot():
                                  "%s %s in %s" % (user, log["event"], channel))
 
         if "output" in log:
-            self.sc.rtm_send_message(self.debug_channel, log["output"])
+            self.sc.rtm_send_message(log["channel"], log["output"])
 
     def log_help(self):
         msg = "Available commands:\r"
