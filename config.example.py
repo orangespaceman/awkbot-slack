@@ -11,3 +11,15 @@ slack = {
 emoji = {
     "media_player": "afplay"
 }
+
+router = {
+    "url": "",
+    "username": "",
+    "password": ""
+}
+
+people = {
+  "Name": [
+    "mac:id"
+  ]
+}
