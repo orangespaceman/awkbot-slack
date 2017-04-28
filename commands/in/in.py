@@ -34,7 +34,8 @@ def whos_in(event):
     return {
         "user": event["user"],
         "channel": event["channel"],
-        "event": "asked who was in: %s" % people
+        "event": "asked who was in, ",
+        "output": people
     }
 
 
