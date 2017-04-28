@@ -34,7 +34,7 @@ def whos_in(event):
     return {
         "user": event["user"],
         "channel": event["channel"],
-        "event": "asked who was in, ",
+        "event": "asked who was in,",
         "output": people
     }
 
@@ -81,7 +81,8 @@ def parse_json(json):
     people_in = []
     for person, person_macs in people.iteritems():
         for device in json:
-            if device["macAddr"] in person_macs:
+            if (device["macAddr"] in person_macs and
+                    device["online"] == "active"):
                 people_in.append(person)
                 break
 
