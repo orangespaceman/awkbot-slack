@@ -75,7 +75,8 @@ class Bot():
                     # filter - message from a public channel?
                     if event.get("type") == "message":
                         channel = event["channel"]
-                    elif event.get("type") == "reaction_added":
+                    elif (event.get("type") == "reaction_added"
+                          and "channel" in event["item"]):
                         channel = event["item"]["channel"]
                     else:
                         return
