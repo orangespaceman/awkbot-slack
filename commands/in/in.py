@@ -1,3 +1,4 @@
+import random
 import requests
 import re
 
@@ -20,23 +21,55 @@ def list_actions():
             "description": "See who's in!",
             "content": ["who is in"],
             "function": "whos_in"
+        },
+        {
+            "type": "message",
+            "description": "Who's turn to make tea?",
+            "content": ["tea", "brew", "splosh"],
+            "function": "tea"
         }
     ]
 
 
 def whos_in(event):
-    session_id = retrieve_session_id()
-    session_cookie = login(session_id)
-    people_json = request_json(session_id, session_cookie)
-    people = parse_json(people_json)
-    logout(session_id, session_cookie)
+    people_in = get_people()
+    if len(people_in) == 0:
+        output = "Only me :'("
+    elif len(people_in) == 1:
+        output = "Just %s" % people_in[0]
+    else:
+        output = ", ".join(str(name) for name in people_in)
 
     return {
         "user": event["user"],
         "channel": event["channel"],
         "event": "asked who was in,",
-        "output": people
+        "output": output
     }
+
+
+def tea(event):
+    people_in = get_people()
+    if len(people_in) == 0:
+        output = "Looks like I'm making my own tea again :'("
+    else:
+        output = "%s, get the kettle on" % random.choice(people_in)
+
+    return {
+        "user": event["user"],
+        "channel": event["channel"],
+        "event": "asked who should make the tea,",
+        "output": output
+    }
+
+
+def get_people():
+    session_id = retrieve_session_id()
+    session_cookie = login(session_id)
+    people_json = request_json(session_id, session_cookie)
+    people = parse_json(people_json)
+    logout(session_id, session_cookie)
+    return people
 
 
 def retrieve_session_id():
@@ -86,9 +119,4 @@ def parse_json(json):
                 people_in.append(person)
                 break
 
-    if len(people_in) == 0:
-        return "Only me :'("
-    elif len(people_in) == 1:
-        return "Just %s" % people_in[0]
-    else:
-        return ", ".join(str(name) for name in people_in)
+    return people_in
