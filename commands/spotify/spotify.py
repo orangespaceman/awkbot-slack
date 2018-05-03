@@ -29,8 +29,8 @@ def list_actions():
         {
             "type": "message",
             "description": "Play/Pause (toggle) Spotify",
-            "content": ["playpause"],
-            "function": "playpause"
+            "content": ["toggle"],
+            "function": "toggle"
         },
         {
             "type": "message",
@@ -72,21 +72,21 @@ def play(event):
     }
 
 
-def playpause(event):
-    spotify_command("playpause")
-    return {
-        "user": event["user"],
-        "channel": event["channel"],
-        "event": "triggered spotify playpause"
-    }
-
-
 def pause(event):
     spotify_command("pause")
     return {
         "user": event["user"],
         "channel": event["channel"],
         "event": "triggered spotify pause"
+    }
+
+
+def toggle(event):
+    spotify_command("toggle")
+    return {
+        "user": event["user"],
+        "channel": event["channel"],
+        "event": "triggered spotify toggle"
     }
 
 
