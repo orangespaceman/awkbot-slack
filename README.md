@@ -1,6 +1,6 @@
 # Awkbot for Slack
 
-_Awkbot_: A slackbot for [Studio Awkward](https://getawkward.co.uk)
+_Awkbot_: A custom slackbot
 
 ## Available commands
 
